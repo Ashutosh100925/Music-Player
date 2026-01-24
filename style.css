@@ -1,0 +1,289 @@
+
+/* ===============================
+   SPOTIFY DARK THEME BASE
+   =============================== */
+body {
+  background: #121212;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  overflow: hidden;
+}
+
+/* CENTER WRAPPER */
+.wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+/* ===============================
+   MAIN PLAYER BAR
+   =============================== */
+.player {
+  width: 100%;
+  background-color: var(--base-color);
+  color: var(--text-color);
+  border-color: black;
+  border-radius: 8px;
+  padding: 16px 20px 26px;
+  box-shadow: none;
+  position: absolute;
+  bottom: 0px;
+}
+
+/* TOP ROW → HORIZONTAL */
+.player__top {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+/* ===============================
+   ALBUM COVER
+   =============================== */
+.player-cover {
+  margin-right: 12px;
+}
+
+.player-cover__item {
+  width: 80px;
+  height: 80px;
+  border-radius: 6px;
+  background-size: cover;
+  background-position: center;
+  box-shadow: none;
+}
+
+/* REMOVE OLD GLOW EFFECTS */
+.player-cover__item::before,
+.player-cover__item::after {
+  display: none;
+}
+
+/* ===============================
+   CONTROLS
+   =============================== */
+.player-controls {
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin: 0 auto;
+  padding: 16px 32px;
+}
+
+/* ALL ICONS */
+.player-controls__item {
+  width: 28px !important;
+  height: 28px !important;
+  padding: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* FAVORITE → 1st */
+.player-controls__item:nth-child(1) {
+  order: 1;
+}
+
+/* SHARE → 2nd */
+.player-controls__item:nth-child(2) {
+  order: 5;
+}
+
+/* PLAY BUTTON → 3rd */
+.player-controls__item.-xl {
+  order: 3;
+  width: 40px !important;
+  height: 40px !important;
+  color: #ffffff !important;
+}
+
+/* PREVIOUS → 4th */
+.player-controls__item:nth-child(3):not(.-xl) {
+  order: 2;
+}
+
+/* NEXT → 5th */
+.player-controls__item:nth-child(4):not(.-xl) {
+  order: 4;
+}
+
+/* FAVORITE ACTIVE COLOR */
+.player-controls__item.-favorite.active {
+  color: #1db954 !important;
+}
+
+/* REMOVE CIRCLES */
+.player-controls__item::before {
+  display: none !important;
+}
+
+.icon {
+  fill: var(--text-color);
+  stroke: var(--text-color);
+}
+
+
+/* ===============================
+   TRACK INFO
+   =============================== */
+.album-info {
+  margin-left: 20px;
+  flex: 1;
+  color:var(--text-color);
+  min-width: 180px;
+  padding: 0;
+}
+
+.album-info__name {
+  font-size: 14px;
+  font-weight: 600;
+  padding-left: 75px;
+  padding-bottom: 4px;
+  position: absolute;
+  left: -375px;
+  bottom: 40px;
+}
+
+.album-info__track {
+  font-size: 13px;
+  color: #b3b3b3;
+  padding-left: 75px;
+  padding-top: 2px;
+  position: absolute;
+  left: -375px;
+  bottom: 25px;
+}
+
+/* ===============================
+   PROGRESS BAR – FORCE LAYOUT
+   =============================== */
+.progress {
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+  right: 20px;
+
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  margin-left: 400px;
+  gap: 12px;
+}
+
+/* FORCE ORDER */
+.progress__time {
+  order: 1;
+  font-size: 11px;
+  color: var(--text-color);
+  min-width: 40px;
+  text-align: right;
+}
+
+.progress__bar {
+  order: 2;
+  flex: 1;
+  max-width: 720px;
+  height: 4px;
+  background: #404040;
+  border-radius: 2px;
+}
+
+.progress__current {
+  height: 100%;
+  width: 0%;
+  background: #1db954;
+  border-radius: 2px;
+}
+
+.progress__duration {
+  order: 3;
+  font-size: 11px;
+  color: var(--text-color);
+  min-width: 40px;
+  text-align: left;
+  bottom: 1px;
+  left: 995px;
+  position: absolute;
+}
+
+
+/* Dark Mode */
+:root{
+  --base-color: white;
+  --base-variant: #e8e9ed;
+  --text-color: #111528;
+  --secondary-text: #232738;
+  --primary-color: #3a435d;
+  --accent-color: #0071ff;
+}
+.darkmode{
+  --base-color: #070b1d;
+  --base-variant: #101425;
+  --text-color: #ffffff;
+  --secondary-text: #a4a5b8;
+  --primary-color: #3a435d;
+  --accent-color: #0071ff;
+}
+*{
+  margin: 0;
+  padding: 0;
+}
+html{
+  font-family: Poppins;
+}
+body{
+  min-height: 100vh;
+  background-color: var(--base-color);
+  color: var(--text-color);
+}
+header, section{
+  padding: 70px min(50px, 7%);
+}
+section{
+  background-color: var(--base-variant);
+}
+p{
+  margin: 10px 0 20px 0;
+  color: var(--secondary-text);
+}
+button{
+  border: none;
+  padding: .8em 2em;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 4px;
+  font: inherit;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+}
+.cta-button{
+  background-color: var(--accent-color);
+}
+#theme-switch{
+  height: 50px;
+  width: 50px;
+  padding: 0;
+  border-radius: 50%;
+  background-color: var(--base-variant);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+#theme-switch svg{
+  fill: var(--primary-color);
+}
+#theme-switch svg:last-child{
+  display: none;
+}
+.darkmode #theme-switch svg:first-child{
+  display: none;
+}
+.darkmode #theme-switch svg:last-child{
+  display: block;
+}
