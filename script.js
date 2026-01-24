@@ -59,7 +59,6 @@ new Vue({
         this.audio.pause();
         this.isTimerPlaying = false;
       }
-      localStorage.setItem("isTimerPlaying", this.isTimerPlaying);
     },
 
     generateTime() {
@@ -76,10 +75,6 @@ new Vue({
 
       this.duration = `${durMin < 10 ? "0" : ""}${durMin}:${durSec < 10 ? "0" : ""}${durSec}`;
       this.currentTime = `${curMin < 10 ? "0" : ""}${curMin}:${curSec < 10 ? "0" : ""}${curSec}`;
-
-      // SAVE STATE
-      localStorage.setItem("currentTrackIndex", this.currentTrackIndex);
-      localStorage.setItem("currentTime", this.audio.currentTime);
     },
 
     updateBar(x) {
@@ -120,10 +115,9 @@ new Vue({
     switchTrack() {
       this.currentTrack = this.tracks[this.currentTrackIndex];
       this.audio.src = this.currentTrack.source;
-      this.audio.currentTime = 0;
 
-      localStorage.setItem("currentTrackIndex", this.currentTrackIndex);
-      localStorage.setItem("currentTime", 0);
+      // START FROM BEGINNING
+      this.audio.currentTime = 0;
 
       if (this.isTimerPlaying) {
         this.audio.play();
@@ -139,26 +133,18 @@ new Vue({
   created() {
     let vm = this;
 
-    // RESTORE SAVED STATE
+    // RESTORE ONLY THE TRACK INDEX ON PAGE LOAD
     const savedIndex = localStorage.getItem("currentTrackIndex");
-    const savedTime = localStorage.getItem("currentTime");
-    const savedPlaying = localStorage.getItem("isTimerPlaying") === "true";
-
     this.currentTrackIndex = savedIndex !== null ? Number(savedIndex) : 0;
     this.currentTrack = this.tracks[this.currentTrackIndex];
 
     this.audio = new Audio(this.currentTrack.source);
 
     this.audio.onloadedmetadata = function () {
-      if (savedTime) {
-        vm.audio.currentTime = Number(savedTime);
-      }
+      // Always start from 0:00 on reload
+      vm.audio.currentTime = 0;
       vm.generateTime();
-
-      if (savedPlaying) {
-        vm.audio.play();
-        vm.isTimerPlaying = true;
-      }
+      // Do NOT auto-play
     };
 
     this.audio.ontimeupdate = function () {
