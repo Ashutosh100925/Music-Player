@@ -1,9 +1,8 @@
 
 /* ===============================
-   SPOTIFY DARK THEME BASE
+  SPOTIFY DARK THEME BASE
    =============================== */
 body {
-  background: #121212;
   font-family: "Helvetica Neue", Arial, sans-serif;
   overflow: hidden;
 }
@@ -16,12 +15,11 @@ body {
 }
 
 /* ===============================
-   MAIN PLAYER BAR
+  MAIN PLAYER BAR
    =============================== */
 .player {
   width: 100%;
-  background-color: var(--base-color);
-  color: var(--text-color);
+  background-color: var(--base-color-2);
   border-color: black;
   border-radius: 8px;
   padding: 16px 20px 26px;
@@ -38,7 +36,7 @@ body {
 }
 
 /* ===============================
-   ALBUM COVER
+  ALBUM COVER
    =============================== */
 .player-cover {
   margin-right: 12px;
@@ -60,7 +58,7 @@ body {
 }
 
 /* ===============================
-   CONTROLS
+  CONTROLS
    =============================== */
 .player-controls {
   justify-self: center;
@@ -111,7 +109,9 @@ body {
 
 /* FAVORITE ACTIVE COLOR */
 .player-controls__item.-favorite.active {
-  color: #1db954 !important;
+  cursor: pointer;
+  z-index: 1;
+  color: #ffffff;
 }
 
 /* REMOVE CIRCLES */
@@ -119,14 +119,18 @@ body {
   display: none !important;
 }
 
+/* GENERAL ICONS */
 .icon {
   fill: var(--text-color);
   stroke: var(--text-color);
+  cursor: pointer;
 }
 
 
+
+
 /* ===============================
-   TRACK INFO
+  TRACK INFO
    =============================== */
 .album-info {
   margin-left: 20px;
@@ -157,7 +161,7 @@ body {
 }
 
 /* ===============================
-   PROGRESS BAR – FORCE LAYOUT
+  PROGRESS BAR – FORCE LAYOUT
    =============================== */
 .progress {
   position: absolute;
@@ -212,6 +216,7 @@ body {
 /* Dark Mode */
 :root{
   --base-color: white;
+  --base-color-2: rgba(255, 255, 255, 0.74);
   --base-variant: #e8e9ed;
   --text-color: #111528;
   --secondary-text: #232738;
@@ -219,9 +224,11 @@ body {
   --accent-color: #0071ff;
 }
 .darkmode{
-  --base-color: #070b1d;
+  --base-color: #000000;
   --base-variant: #101425;
+  --base-color-2: #3a38388f;
   --text-color: #ffffff;
+  --text-color-2: red;
   --secondary-text: #a4a5b8;
   --primary-color: #3a435d;
   --accent-color: #0071ff;
