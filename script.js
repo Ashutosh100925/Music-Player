@@ -10,93 +10,61 @@ new Vue({
       isTimerPlaying: false,
       tracks: [
         {
-          name: "Mekanın Sahibi",
-          artist: "Norm Ender",
-          cover: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/1.jpg",
-          source: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/1.mp3",
-          url: "https://www.youtube.com/watch?v=z3wAjJXbYzA",
-          favorited: false
-        },
-        {
           name: "Sitaare",
           artist: "Arijit Singh",
-          cover: "Sitaare.jpg",
-          source: "Sitaare Ikkis 128 Kbps.mp3",
+          cover: "https://raw.githubusercontent.com/Ashutosh100925/Music-Player/main/images/Sitaare.jpg",
+          source: "https://raw.githubusercontent.com/Ashutosh100925/Music-Player/main/mp3%20files/Sitaare%20Ikkis%20128%20Kbps.mp3",
           url: "https://youtu.be/FSFCxQIn_Gg?si=8wg6UrmbjhsyB-Ab",
           favorited: false
         },
         {
           name: "Tere Liye",
           artist: "Atif Aslam",
-          cover: "download.jpg",
-          source: "Tere Liye Prince 320 Kbps.mp3",
+          cover: "https://raw.githubusercontent.com/Ashutosh100925/Music-Player/main/images/Tere%20liye.jpg",
+          source: "https://raw.githubusercontent.com/Ashutosh100925/Music-Player/main/mp3%20files/Tere%20Liye%20Prince%20320%20Kbps.mp3",
           url: "https://youtu.be/AlvUuGJccKs?si=Lh7UDUKCo6A7lxdL",
           favorited: false
         },
         {
-          name: "Everybody Knows",
-          artist: "Leonard Cohen",
-          cover: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/2.jpg",
-          source: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/2.mp3",
-          url: "https://www.youtube.com/watch?v=Lin-a2lTelg",
-          favorited: true
-        },
-        {
-          name: "Extreme Ways",
-          artist: "Moby",
-          cover: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/3.jpg",
-          source: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/3.mp3",
-          url: "https://www.youtube.com/watch?v=ICjyAe9S54c",
+          name: "Tu hi meri Shab hai",
+          artist: "Pritam & KK",
+          cover: "https://raw.githubusercontent.com/Ashutosh100925/Music-Player/main/images/KK-1.png",
+          source: "https://raw.githubusercontent.com/Ashutosh100925/Music-Player/main/mp3%20files/Tu%20Hi%20Meri%20Shab%20Hai%20Gangster%20320%20Kbps.mp3",
+          url: "https://youtu.be/mWBvudKcByg?si=hqLWfvu_YVuyvxnm",
           favorited: false
         },
         {
-          name: "Butterflies",
-          artist: "Sia",
-          cover: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/4.jpg",
-          source: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/4.mp3",
-          url: "https://www.youtube.com/watch?v=kYgGwWYOd9Y",
+          name: "Khamoshiyan",
+          artist: "Arijit Singh",
+          cover: "https://raw.githubusercontent.com/Ashutosh100925/Music-Player/main/images/Khamoshiyan.jpg",
+          source: "https://raw.githubusercontent.com/Ashutosh100925/Music-Player/main/mp3%20files/Khamoshiyan%20Jeet%20Gannguli%20320%20Kbps.mp3",
+          url: "https://youtu.be/Mv3SZDP7QUo?si=N0-zlquTmCEN8Vze",
           favorited: false
         },
         {
-          name: "The Final Victory",
-          artist: "Haggard",
-          cover: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/5.jpg",
-          source: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/5.mp3",
-          url: "https://www.youtube.com/watch?v=0WlpALnQdN8",
-          favorited: true
-        },
-        {
-          name: "Genius ft. Sia, Diplo, Labrinth",
-          artist: "LSD",
-          cover: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/6.jpg",
-          source: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/6.mp3",
-          url: "https://www.youtube.com/watch?v=HhoATZ1Imtw",
+          name: "Baatein ye kabhi na",
+          artist: "Arijit Singh",
+          cover: "https://raw.githubusercontent.com/Ashutosh100925/Music-Player/main/images/Khamoshiyan.jpg",
+          source: "https://raw.githubusercontent.com/Ashutosh100925/Music-Player/main/mp3%20files/Baatein%20Ye%20Kabhi%20Na(KoshalWorld.Com).mp3",
+          url: "https://youtu.be/SOessajf_Ik?si=jxAtx4xl7Xizvb0t",
           favorited: false
         },
         {
-          name: "The Comeback Kid",
-          artist: "Lindi Ortega",
-          cover: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/7.jpg",
-          source: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/7.mp3",
-          url: "https://www.youtube.com/watch?v=me6aoX0wCV8",
-          favorited: true
-        },
-        {
-          name: "Overdose",
-          artist: "Grandson",
-          cover: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/8.jpg",
-          source: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/8.mp3",
-          url: "https://www.youtube.com/watch?v=00-Rl3Jlx-o",
+          name: "Tum Hi Ho",
+          artist: "Arijit Singh",
+          cover: "https://raw.githubusercontent.com/Ashutosh100925/Music-Player/main/images/Tum%20hi%20ho.jpg",
+          source: "https://raw.githubusercontent.com/Ashutosh100925/Music-Player/main/mp3%20files/Tum%20Hi%20Ho(KoshalWorld.Com).mp3",
+          url: "https://youtu.be/NUo8CKI34o4?si=a2IspfnC1mB09zmO",
           favorited: false
         },
         {
-          name: "Rag'n'Bone Man",
-          artist: "Human",
-          cover: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/9.jpg",
-          source: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/9.mp3",
-          url: "https://www.youtube.com/watch?v=L3wKzyIN1yk",
+          name: "Rabba",
+          artist: "Mohit Chauhan",
+          cover: "https://raw.githubusercontent.com/Ashutosh100925/Music-Player/main/images/Rabba.jpg",
+          source: "https://raw.githubusercontent.com/Ashutosh100925/Music-Player/main/mp3%20files/Rabba%20Heropanti%20320%20Kbps.mp3",
+          url: "https://youtu.be/o4mHtJLgMLs?si=BL0JHfVb7ggT3hHN",
           favorited: false
-        }
+        },
       ],
       currentTrack: null,
       currentTrackIndex: 0,
