@@ -3,11 +3,12 @@ new Vue({
   data() {
     return {
       audio: null,
-      circleLeft: null,
-      barWidth: null,
-      duration: null,
-      currentTime: null,
+      circleLeft: "0%",
+      barWidth: "0%",
+      duration: "00:00",
+      currentTime: "00:00",
       isTimerPlaying: false,
+
       tracks: [
         {
           name: "Sitaare",
@@ -40,37 +41,15 @@ new Vue({
           source: "https://raw.githubusercontent.com/Ashutosh100925/Music-Player/main/mp3%20files/Khamoshiyan%20Jeet%20Gannguli%20320%20Kbps.mp3",
           url: "https://youtu.be/Mv3SZDP7QUo?si=N0-zlquTmCEN8Vze",
           favorited: false
-        },
-        {
-          name: "Baatein ye kabhi na",
-          artist: "Arijit Singh",
-          cover: "https://raw.githubusercontent.com/Ashutosh100925/Music-Player/main/images/Khamoshiyan.jpg",
-          source: "https://raw.githubusercontent.com/Ashutosh100925/Music-Player/main/mp3%20files/Baatein%20Ye%20Kabhi%20Na(KoshalWorld.Com).mp3",
-          url: "https://youtu.be/SOessajf_Ik?si=jxAtx4xl7Xizvb0t",
-          favorited: false
-        },
-        {
-          name: "Tum Hi Ho",
-          artist: "Arijit Singh",
-          cover: "https://raw.githubusercontent.com/Ashutosh100925/Music-Player/main/images/Tum%20hi%20ho.jpg",
-          source: "https://raw.githubusercontent.com/Ashutosh100925/Music-Player/main/mp3%20files/Tum%20Hi%20Ho(KoshalWorld.Com).mp3",
-          url: "https://youtu.be/NUo8CKI34o4?si=a2IspfnC1mB09zmO",
-          favorited: false
-        },
-        {
-          name: "Rabba",
-          artist: "Mohit Chauhan",
-          cover: "https://raw.githubusercontent.com/Ashutosh100925/Music-Player/main/images/Rabba.jpg",
-          source: "https://raw.githubusercontent.com/Ashutosh100925/Music-Player/main/mp3%20files/Rabba%20Heropanti%20320%20Kbps.mp3",
-          url: "https://youtu.be/o4mHtJLgMLs?si=BL0JHfVb7ggT3hHN",
-          favorited: false
-        },
+        }
       ],
+
       currentTrack: null,
       currentTrackIndex: 0,
       transitionName: null
     };
   },
+
   methods: {
     play() {
       if (this.audio.paused) {
@@ -80,119 +59,128 @@ new Vue({
         this.audio.pause();
         this.isTimerPlaying = false;
       }
+      localStorage.setItem("isTimerPlaying", this.isTimerPlaying);
     },
+
     generateTime() {
+      if (!this.audio.duration) return;
+
       let width = (100 / this.audio.duration) * this.audio.currentTime;
       this.barWidth = width + "%";
       this.circleLeft = width + "%";
-      let durmin = Math.floor(this.audio.duration / 60);
-      let dursec = Math.floor(this.audio.duration - durmin * 60);
-      let curmin = Math.floor(this.audio.currentTime / 60);
-      let cursec = Math.floor(this.audio.currentTime - curmin * 60);
-      if (durmin < 10) {
-        durmin = "0" + durmin;
-      }
-      if (dursec < 10) {
-        dursec = "0" + dursec;
-      }
-      if (curmin < 10) {
-        curmin = "0" + curmin;
-      }
-      if (cursec < 10) {
-        cursec = "0" + cursec;
-      }
-      this.duration = durmin + ":" + dursec;
-      this.currentTime = curmin + ":" + cursec;
+
+      let durMin = Math.floor(this.audio.duration / 60);
+      let durSec = Math.floor(this.audio.duration % 60);
+      let curMin = Math.floor(this.audio.currentTime / 60);
+      let curSec = Math.floor(this.audio.currentTime % 60);
+
+      this.duration = `${durMin < 10 ? "0" : ""}${durMin}:${durSec < 10 ? "0" : ""}${durSec}`;
+      this.currentTime = `${curMin < 10 ? "0" : ""}${curMin}:${curSec < 10 ? "0" : ""}${curSec}`;
+
+      // SAVE STATE
+      localStorage.setItem("currentTrackIndex", this.currentTrackIndex);
+      localStorage.setItem("currentTime", this.audio.currentTime);
     },
+
     updateBar(x) {
       let progress = this.$refs.progress;
-      let maxduration = this.audio.duration;
-      let position = x - progress.offsetLeft;
-      let percentage = (100 * position) / progress.offsetWidth;
-      if (percentage > 100) {
-        percentage = 100;
-      }
-      if (percentage < 0) {
-        percentage = 0;
-      }
+      let percentage = (100 * (x - progress.offsetLeft)) / progress.offsetWidth;
+      percentage = Math.max(0, Math.min(100, percentage));
+
       this.barWidth = percentage + "%";
       this.circleLeft = percentage + "%";
-      this.audio.currentTime = (maxduration * percentage) / 100;
+      this.audio.currentTime = (this.audio.duration * percentage) / 100;
       this.audio.play();
-    },
-    clickProgress(e) {
       this.isTimerPlaying = true;
+    },
+
+    clickProgress(e) {
       this.audio.pause();
       this.updateBar(e.pageX);
     },
+
     prevTrack() {
-      this.transitionName = "scale-in";
-      this.isShowCover = false;
-      if (this.currentTrackIndex > 0) {
-        this.currentTrackIndex--;
-      } else {
-        this.currentTrackIndex = this.tracks.length - 1;
-      }
-      this.currentTrack = this.tracks[this.currentTrackIndex];
-      this.resetPlayer();
+      this.currentTrackIndex =
+        this.currentTrackIndex > 0
+          ? this.currentTrackIndex - 1
+          : this.tracks.length - 1;
+
+      this.switchTrack();
     },
+
     nextTrack() {
-      this.transitionName = "scale-out";
-      this.isShowCover = false;
-      if (this.currentTrackIndex < this.tracks.length - 1) {
-        this.currentTrackIndex++;
-      } else {
-        this.currentTrackIndex = 0;
-      }
+      this.currentTrackIndex =
+        this.currentTrackIndex < this.tracks.length - 1
+          ? this.currentTrackIndex + 1
+          : 0;
+
+      this.switchTrack();
+    },
+
+    switchTrack() {
       this.currentTrack = this.tracks[this.currentTrackIndex];
-      this.resetPlayer();
-    },
-    resetPlayer() {
-      this.barWidth = 0;
-      this.circleLeft = 0;
-      this.audio.currentTime = 0;
       this.audio.src = this.currentTrack.source;
-      setTimeout(() => {
-        if (this.isTimerPlaying) {
-          this.audio.play();
-        } else {
-          this.audio.pause();
-        }
-      }, 300);
+      this.audio.currentTime = 0;
+
+      localStorage.setItem("currentTrackIndex", this.currentTrackIndex);
+      localStorage.setItem("currentTime", 0);
+
+      if (this.isTimerPlaying) {
+        this.audio.play();
+      }
     },
+
     favorite() {
-      this.tracks[this.currentTrackIndex].favorited = !this.tracks[
-        this.currentTrackIndex
-      ].favorited;
+      this.tracks[this.currentTrackIndex].favorited =
+        !this.tracks[this.currentTrackIndex].favorited;
     }
   },
+
   created() {
     let vm = this;
-    this.currentTrack = this.tracks[0];
-    this.audio = new Audio();
-    this.audio.src = this.currentTrack.source;
+
+    // RESTORE SAVED STATE
+    const savedIndex = localStorage.getItem("currentTrackIndex");
+    const savedTime = localStorage.getItem("currentTime");
+    const savedPlaying = localStorage.getItem("isTimerPlaying") === "true";
+
+    this.currentTrackIndex = savedIndex !== null ? Number(savedIndex) : 0;
+    this.currentTrack = this.tracks[this.currentTrackIndex];
+
+    this.audio = new Audio(this.currentTrack.source);
+
+    this.audio.onloadedmetadata = function () {
+      if (savedTime) {
+        vm.audio.currentTime = Number(savedTime);
+      }
+      vm.generateTime();
+
+      if (savedPlaying) {
+        vm.audio.play();
+        vm.isTimerPlaying = true;
+      }
+    };
+
     this.audio.ontimeupdate = function () {
       vm.generateTime();
     };
-    this.audio.onloadedmetadata = function () {
-      vm.generateTime();
-    };
+
     this.audio.onended = function () {
       vm.nextTrack();
-      this.isTimerPlaying = true;
+      vm.isTimerPlaying = true;
     };
 
-    // // this is optional (for preload covers)
-    for (let index = 0; index < this.tracks.length; index++) {
-      const element = this.tracks[index];
-      let link = document.createElement('link');
+    // PRELOAD COVERS
+    this.tracks.forEach(track => {
+      const link = document.createElement("link");
       link.rel = "prefetch";
-      link.href = element.cover;
-      link.as = "image"
-      document.head.appendChild(link)
-    }
+      link.href = track.cover;
+      link.as = "image";
+      document.head.appendChild(link);
+    });
   }
 });
+
 
 // Dark mode
 let darkmode = localStorage.getItem('darkmode')
